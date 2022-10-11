@@ -5,8 +5,17 @@ import java.util.Set;
 
 import hotel.BookingDetail;
 import hotel.BookingManager;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class BookingClient extends AbstractScriptedSimpleTest {
+
+
+	//moet dezelfde naam zijn als de rebind
+	public static final String hotelName = "Ibis";
 
 	private BookingManager bm = null;
 
@@ -20,8 +29,9 @@ public class BookingClient extends AbstractScriptedSimpleTest {
 	 ***************/
 	public BookingClient() {
 		try {
-			//Look up the registered remote instance
-			bm = new BookingManager();
+			Registry registry = LocateRegistry.getRegistry();
+			bm = (BookingManager) registry.lookup(hotelName);
+
 		} catch (Exception exp) {
 			exp.printStackTrace();
 		}
