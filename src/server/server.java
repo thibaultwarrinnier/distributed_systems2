@@ -1,6 +1,7 @@
 package server;
 
 import hotel.BookingManager;
+import hotel.IBookingManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -21,6 +22,8 @@ public class server {
     private static final Logger logger = Logger.getLogger(server.class.getName());
 
     public static void main(String[] args) throws Exception {
+
+        IBookingManager bm = new BookingManager();
 
 
     }
