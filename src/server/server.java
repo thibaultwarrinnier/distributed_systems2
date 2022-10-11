@@ -26,5 +26,25 @@ public class server {
         IBookingManager bm = new BookingManager();
 
 
+        Registry registry = null;
+        try {
+            registry = LocateRegistry.getRegistry();
+
+        } catch(RemoteException e) {
+            logger.log(Level.SEVERE, "Could not locate RMI registry.");
+            System.exit(-1);
+        }
+        IBookingManager stub;
+
+        try {
+            stub = (IBookingManager) UnicastRemoteObject.exportObject(bm, 0);
+            registry.rebind(hotelName, stub);
+
+            logger.log(Level.INFO, "<{0}> Car Rental Company {0} is registered.", hotelName);
+        } catch(RemoteException e) {
+            logger.log(Level.SEVERE, "<{0}> Could not get stub bound of Car Rental Company {0}.", hotelName);
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 }
