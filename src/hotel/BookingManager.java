@@ -1,8 +1,10 @@
 package hotel;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class BookingManager implements IBookingManager {
@@ -23,12 +25,30 @@ public class BookingManager implements IBookingManager {
 	}
 
 	public boolean isRoomAvailable(Integer roomNumber, LocalDate date) {
-		//implement this method
+		int size = Array.getLength(rooms);
+		for (int i = 0; i < size; i++){
+			if (roomNumber.equals(rooms[i].getRoomNumber())){
+				List<BookingDetail> bookings = rooms[i].getBookings();
+				for (BookingDetail booking : bookings) {
+					LocalDate datum = booking.getDate();
+					if (datum.equals(date)) {
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 
 	public void addBooking(BookingDetail bookingDetail) {
-		//implement this method
+		int size = Array.getLength(rooms);
+		for (int i = 0; i < size; i++){
+			if (bookingDetail.getRoomNumber().equals(rooms[i].getRoomNumber())){
+				List<BookingDetail> bookings = rooms[i].getBookings();
+				bookings.add(bookingDetail);
+				rooms[i].setBookings(bookings);
+			}
+		}
 	}
 
 	public Set<Integer> getAvailableRooms(LocalDate date) {
