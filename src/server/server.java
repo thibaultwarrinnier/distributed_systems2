@@ -23,6 +23,7 @@ public class server {
 
     public static void main(String[] args) throws Exception {
 
+        System.setSecurityManager(null);
         IBookingManager bm = new BookingManager();
 
 
@@ -38,6 +39,7 @@ public class server {
 
         try {
             stub = (IBookingManager) UnicastRemoteObject.exportObject(bm, 0);
+
             registry.rebind(hotelName, stub);
 
             logger.log(Level.INFO, "<{0}> Car Rental Company {0} is registered.", hotelName);

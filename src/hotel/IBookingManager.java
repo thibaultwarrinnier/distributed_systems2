@@ -12,4 +12,6 @@ public interface IBookingManager extends Remote {
 
     public Set<Integer> getAvailableRooms(LocalDate date) throws RemoteException;
 
+    public Set<Integer> getAllRooms() throws RemoteException;
+
 }
