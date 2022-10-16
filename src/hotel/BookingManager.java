@@ -52,8 +52,14 @@ public class BookingManager implements IBookingManager {
 	}
 
 	public Set<Integer> getAvailableRooms(LocalDate date) {
-		//implement this method
-		return null;
+		Set<Integer> avRooms = new HashSet<Integer>();
+		Iterable<Room> roomIterator = Arrays.asList(rooms);
+		for (Room room : roomIterator){
+			if (isRoomAvailable(room.getRoomNumber(), date)){
+				avRooms.add(room.getRoomNumber());
+			}
+		}
+		return avRooms;
 	}
 
 	private static Room[] initializeRooms() {
