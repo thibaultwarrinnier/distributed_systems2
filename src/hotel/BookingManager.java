@@ -32,12 +32,12 @@ public class BookingManager implements IBookingManager {
 				for (BookingDetail booking : bookings) {
 					LocalDate datum = booking.getDate();
 					if (datum.equals(date)) {
-						return true;
+						return false;
 					}
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 
 	public void addBooking(BookingDetail bookingDetail) {
